@@ -4,6 +4,12 @@ var<push_constant> ctx: Uniform;
 @group(0) @binding(1) var texture_sampler: sampler;
 
 struct Uniform {
+    // all in px
+    viewport: vec2f,
+    position: vec2f,
+    size: vec2f,
+
+    // texture array index
     n: u32
 }
 
@@ -17,7 +23,10 @@ fn vert(
     @location(0) pos: vec4f,
     @location(1) uv: vec2f
 ) -> VertexOutput {
-    return VertexOutput(pos, uv * vec2f(1.0, -1.0));
+    let scale = ctx.size / ctx.viewport;
+    let translate = ctx.position / ctx.viewport - vec2f(1.0);
+    let clip = vec4f(pos.xy * scale + translate, pos.z, pos.w);
+    return VertexOutput(clip, uv * vec2f(1.0, -1.0));
 }
 
 @fragment
