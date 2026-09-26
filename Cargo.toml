@@ -1,0 +1,12 @@
+[package]
+name = "supernote-screensaver"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tufa = { path = "../tufa", features = [ "interactive" ] }
+# tufa = { git = "https://github.com/connorslade/tufa", features = [ "interactive" ] }
+
+encase = { version = "0.11.1", features = ["nalgebra"] }
+image = "0.25.10"
+anyhow = "1.0.104"
