@@ -6,6 +6,7 @@ use std::{
 
 use anyhow::Result;
 use image::{EncodableLayout, ImageReader};
+use rand::{rng, seq::SliceRandom};
 use tufa::{
     bindings::{collection::texture_collection::TextureCollection, texture::format::Rf8},
     export::nalgebra::Vector2,
@@ -39,6 +40,7 @@ impl Textures {
             textures.push(texture);
         }
 
+        textures.shuffle(&mut rng());
         let collection = gpu.create_texture_collection(&textures);
 
         Ok(Self {

@@ -57,7 +57,7 @@ impl Interactive for App {
 
         for i in 0..nx {
             let direction = (1 - 2 * (i % 2 == 0) as i8) as f32;
-            let (step, scroll) = (page.y + gap, t * 300.0 * direction);
+            let (step, scroll) = (page.y + gap, t * page.y * 0.3 * direction);
             let (animation, iteration) = (scroll % step, (scroll / step) as i32);
 
             for j in -1..ny as i32 {
